@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "249660186672",
+    "firebase_url": "https://telegram-mini-app-a32f1-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "telegram-mini-app-a32f1",
+    "storage_bucket": "telegram-mini-app-a32f1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249660186672:android:a3902eb77b411a03de0df5",
+        "android_client_info": {
+          "package_name": "com.DefCompany.TgMiniApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALWrEpyHr-LlM1MrLZwxoJy0aroXHHtfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
