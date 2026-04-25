@@ -214,10 +214,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1679987161427979434, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1721363159043428042, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -246,10 +242,6 @@ PrefabInstance:
       propertyPath: _progress
       value: 
       objectReference: {fileID: 1105868515}
-    - target: {fileID: 2917872845267746314, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3311144264380367503, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -273,10 +265,6 @@ PrefabInstance:
     - target: {fileID: 3311144264380367503, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582413121517379377, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5045173516809134063, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -382,10 +370,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7667030286271763095, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8314292276331886604, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -434,10 +418,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8854955618673363919, guid: 92bdf05ed1d227e4299deb8e84a914a6, type: 3}
-      propertyPath: entryPrefab
-      value: 
-      objectReference: {fileID: 8451794535188983535, guid: f3d432fc95fe3434cb65e94f1d4b2616, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
