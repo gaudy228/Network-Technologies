@@ -924,6 +924,7 @@ MonoBehaviour:
   EmailInputField: {fileID: 2165765712508051537}
   PasswordInputField: {fileID: 7786865362833435799}
   StatusText: {fileID: 1786804193157630942}
+  _progressService: {fileID: 0}
 --- !u!223 &1035290299639397664
 Canvas:
   m_ObjectHideFlags: 0

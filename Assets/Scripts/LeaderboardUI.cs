@@ -12,12 +12,12 @@ public class LeaderboardUI : MonoBehaviour
 
     private void Awake()
     {
-        leaderboardService.OnLeaderboardEntry += OnLeaderboardEntryReceived;
+        leaderboardService.OnLeaderboardLoaded += OnLeaderboardEntryReceived;
     }
 
     private void OnDestroy()
     {
-        leaderboardService.OnLeaderboardEntry -= OnLeaderboardEntryReceived;
+        leaderboardService.OnLeaderboardLoaded -= OnLeaderboardEntryReceived;
     }
 
     private void OnLeaderboardEntryReceived(List<LeaderboardEntry> entries)
@@ -47,16 +47,48 @@ public class LeaderboardUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        if (entries == null || entries.Count == 0)
+        {
+            Debug.Log("Нет записей в лидерборде");
+        }
+
         int countToShow = Mathf.Min(entries.Count, 3);
         Debug.Log($"Создание {countToShow} записей из {entries.Count}");
 
         for (int i = 0; i < countToShow; i++)
         {
+            if (entries[i] == null)
+            {
+                Debug.LogWarning($"Запись {i} равна null");
+                continue;
+            }
+
             GameObject entryGO = Instantiate(entryPrefab, spawnGameObject.transform);
-            TextMeshProUGUI textName = entryGO.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI textScore = entryGO.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-            textName.text = entries[i].name;
-            textScore.text = entries[i].score.ToString();
+
+            TextMeshProUGUI textName = entryGO.transform.GetChild(0)?.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI textScore = entryGO.transform.GetChild(1)?.GetComponent<TextMeshProUGUI>();
+
+            if (textName != null)
+                textName.text = entries[i].name ?? "Unknown";
+            else
+                Debug.LogError("TextName component not found at child 0");
+
+            if (textScore != null)
+                textScore.text = entries[i].score.ToString();
+            else
+                Debug.LogError("TextScore component not found at child 1");
+        }
+    }
+
+    public void RefreshLeaderboard()
+    {
+        if (leaderboardService != null)
+        {
+            leaderboardService.LoadTopScores();
+        }
+        else
+        {
+            Debug.LogError("LeaderbordService не назначен в инспекторе!");
         }
     }
 }

@@ -14,34 +14,61 @@ public class ClickerController : MonoBehaviour
             Debug.LogError($"{nameof(_progress)} is null");
             return;
         }
-        _progress.OnCounterChanger += UpdateUI;
-        _progress.OnUserChanger += UserChange;
+
+        _progress.OnCounterChanged += UpdateUI;
+        _progress.OnUserChanged += UserChange;
+
+        UpdateUI(_progress.Counter);
+        bool isLoggedIn = !string.IsNullOrEmpty(_progress.CurrentUserId);
+        UserChange(isLoggedIn ? _progress.CurrentUserId : null);
     }
+
     public void OnClickPressed()
     {
-        if (_progress?.CurrentUser == null)
+        if (string.IsNullOrEmpty(_progress?.CurrentUserId))
         {
+            Debug.Log("Cannot add clicks: User not logged in");
             return;
         }
+
         _progress.AddClicks();
     }
+
     private void UpdateUI(long value)
     {
-        if (_counter.text != null)
+        if (_counter != null)
         {
             _counter.text = $"{value}";
         }
-    }
-    private void UserChange(Firebase.Auth.FirebaseUser user)
-    {
-        if (_gamePanel != null)
+        else
         {
-            _gamePanel.SetActive(user != null);
+            Debug.LogWarning("Counter text component is null");
         }
     }
+
+    private void UserChange(string userId)
+    {
+        bool isLoggedIn = !string.IsNullOrEmpty(userId);
+
+        if (_gamePanel != null)
+        {
+            _gamePanel.SetActive(isLoggedIn);
+        }
+
+        Debug.Log($"ClickerController: User {(isLoggedIn ? "logged in" : "logged out")}");
+
+        if (!isLoggedIn && _counter != null)
+        {
+            _counter.text = "0";
+        }
+    }
+
     private void OnDestroy()
     {
-        _progress.OnCounterChanger -= UpdateUI;
-        _progress.OnUserChanger -= UserChange;
+        if (_progress != null)
+        {
+            _progress.OnCounterChanged -= UpdateUI;
+            _progress.OnUserChanged -= UserChange;
+        }
     }
 }

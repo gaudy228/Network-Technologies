@@ -1,11 +1,9 @@
-using Firebase.Auth;
 using UnityEngine;
 
 public class UIAuthFlow : MonoBehaviour
 {
     [SerializeField] private GameObject _loginPanel;
     [SerializeField] private GameObject _gamePanel;
-
     [SerializeField] private PlayerProgressService _progress;
 
     private void Start()
@@ -15,24 +13,48 @@ public class UIAuthFlow : MonoBehaviour
             Debug.LogError("UIAuthFlow: no progress set");
             return;
         }
-        _progress.OnUserChanger += HandleUserChanged;
-        HandleUserChanged(_progress.CurrentUser);
+
+        _progress.OnUserChanged += HandleUserChanged;
+
+        CheckInitialState();
     }
 
-    private void HandleUserChanged(FirebaseUser user)
+    private void CheckInitialState()
     {
-        bool loggenIn = (user != null);
+        bool isLoggedIn = !string.IsNullOrEmpty(_progress.CurrentUserId);
+        Debug.Log($"UIAuthFlow: Initial state - Logged in: {isLoggedIn}, User ID: {_progress.CurrentUserId}");
+        HandleUserChanged(isLoggedIn ? _progress.CurrentUserId : null);
+    }
+
+    private void HandleUserChanged(string userId)
+    {
+        bool loggedIn = !string.IsNullOrEmpty(userId);
+
+        Debug.Log($"UIAuthFlow: HandleUserChanged - Logged in: {loggedIn}");
+
         if (_loginPanel != null)
         {
-            _loginPanel.SetActive(!loggenIn);
+            _loginPanel.SetActive(!loggedIn);
+            Debug.Log($"Login panel active: {!loggedIn}");
         }
+
         if (_gamePanel != null)
         {
-            _gamePanel.SetActive(loggenIn);
+            _gamePanel.SetActive(loggedIn);
+            Debug.Log($"Game panel active: {loggedIn}");
         }
     }
+
+    public void RefreshUI()
+    {
+        CheckInitialState();
+    }
+
     private void OnDestroy()
     {
-        _progress.OnUserChanger -= HandleUserChanged;
+        if (_progress != null)
+        {
+            _progress.OnUserChanged -= HandleUserChanged;
+        }
     }
 }
